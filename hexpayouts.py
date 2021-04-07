@@ -20,19 +20,21 @@ contract_address = "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39"
 new_balance = w3.toChecksumAddress(contract_address)
 contract = w3.eth.contract(address=new_balance, abi=hex_abi)
 
+# Get daily Payouts and return them as a table
 def getDailyPayoutsPerStake():
     totalDays = contract.functions.currentDay().call()
-    stakeDay = 357
+    stakeDay = DAY_POST_BPD
     payoutPerDay = []
     totalPaid = 0
     while stakeDay < totalDays:
         dailyData = contract.functions.dailyData(stakeDay).call()
         payoutPerDay.append(round((dailyData[0] / dailyData[1] * TEN_THOUSAND), 5))
-        totalPaid += payoutPerDay[stakeDay - 357]
-        print("Payout for address: ", round(payoutPerDay[stakeDay - 357], 3), "HEX - Day:", stakeDay)
+        totalPaid += payoutPerDay[stakeDay - DAY_POST_BPD]
+        print("Payout for address: ", round(payoutPerDay[stakeDay - DAY_POST_BPD], 3), "HEX - Day:", stakeDay)
         stakeDay = stakeDay + 1
     return payoutPerDay
 
+# Simple Polynomial Regression
 def polyReg(x, y):
     polyModel = numpy.poly1d(numpy.polyfit(x, y, 3))
     line = numpy.linspace(357, 485, 100)
