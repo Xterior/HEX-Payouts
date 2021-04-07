@@ -1,6 +1,6 @@
 from web3 import Web3
 import numpy
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt #Need to manually install these libaries since there is no setup.py file currently.
 
 # Constants:
 TEN_THOUSAND = 10000
