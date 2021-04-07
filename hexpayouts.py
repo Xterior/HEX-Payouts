@@ -1,8 +1,9 @@
-from web3 import Web3 # Only this is used for actually interacting with the blockchain
+# Need to manually install these libaries since there is no setup.py file currently.
+
+from web3 import Web3 # Only this libary is used for actually interacting with the blockchain
 import numpy
 import matplotlib.pyplot as plt 
 
-# Need to manually install these libaries since there is no setup.py file currently.
 
 # Constants:
 TEN_THOUSAND = 10000
