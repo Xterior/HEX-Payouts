@@ -4,7 +4,6 @@ from web3 import Web3 # Only this libary is used for actually interacting with t
 import numpy
 import matplotlib.pyplot as plt 
 
-
 # Constants:
 TEN_THOUSAND = 10000
 DAY_POST_BPD = 357
@@ -25,7 +24,6 @@ def getDailyPayoutsPerStake():
     stakeDay = 357
     payoutPerDay = []
     totalPaid = 0
-
     while stakeDay < totalDays:
         dailyData = contract.functions.dailyData(stakeDay).call()
         payoutPerDay.append(round((dailyData[0] / dailyData[1] * TEN_THOUSAND), 5))
@@ -37,7 +35,6 @@ def getDailyPayoutsPerStake():
 def polyReg(x, y):
     polyModel = numpy.poly1d(numpy.polyfit(x, y, 3))
     line = numpy.linspace(357, 485, 100)
-
     plt.scatter(x, y)
     plt.plot(line, polyModel(line))
     plt.show()
@@ -45,7 +42,6 @@ def polyReg(x, y):
 def main():
     payoutPerDay = getDailyPayoutsPerStake()
     days = list(range(DAY_POST_BPD, contract.functions.currentDay().call()))
-
     polyReg(days, payoutPerDay)
 
 if _name_ == "_main_":
